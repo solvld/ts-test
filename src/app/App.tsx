@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react'
 import { outputImage } from '../learnTS/PixelSmile'
-import './style.css'
 import CharForm from '../components/CharForm'
 
 const App = () => {
@@ -11,7 +10,6 @@ const App = () => {
   },[])
   return (
     <>
-      <h1>Hello world</h1>
       <CharForm />
     </>
   )
