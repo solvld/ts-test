@@ -1,7 +1,8 @@
 
 import { useEffect } from 'react'
 import { outputImage } from '../learnTS/PixelSmile'
-import CharForm from '../components/CharForm'
+// import CharForm from '../components/CharForm'
+import ArrivalTime from '../components/ArrivalTime'
 
 const App = () => {
 
@@ -10,7 +11,7 @@ const App = () => {
   },[])
   return (
     <>
-      <CharForm />
+      <ArrivalTime />
     </>
   )
 }
