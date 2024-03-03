@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 const ArrivalTime = () => {
   const [data, setData] = useState([])
   const [stopId, setStopId] = useState('')
+  const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     fetch(
@@ -14,29 +15,28 @@ const ArrivalTime = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setStopId(e.target[0].value)
+    setStopId(inputValue)
   }
+
+  const handleChange = ({ target }) => setInputValue(target.value)
 
   let message
 
   if (!stopId) {
-    message = (
-      <p>
-        Please enter the bus station code
-      </p>
-    );
+    message = <p>Please enter the bus station code</p>
   } else {
-    message = (
-      <p>
-        Loading...
-      </p>
-    );
+    message = <p>Loading...</p>
   }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="bus station code" />
+        <input
+          type="text"
+          placeholder="bus station code"
+          value={inputValue}
+          onChange={handleChange}
+        />
         <button type="submit">submit</button>
       </form>
 
@@ -44,15 +44,17 @@ const ArrivalTime = () => {
         message
       ) : (
         <table>
-          {data.map(row => {
-            return (
-              <tr>
-                <td>{row['RouteNumber']}</td>
-                <td>{row['DestinationStopName']}</td>
-                <td>{row['ArrivalTime']}</td>
-              </tr>
-            )
-          })}
+          <tbody>
+            {data.map((row, index) => {
+              return (
+                <tr key={index}>
+                  <td>{row['RouteNumber']}</td>
+                  <td>{row['DestinationStopName']}</td>
+                  <td>{row['ArrivalTime']}</td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       )}
     </>
